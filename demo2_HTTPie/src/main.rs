@@ -1,4 +1,6 @@
 use clap::{Parser, Subcommand};
+use anyhow::Result;
+use reqwest::Url;
 
 /// Simple program to greet a person
 #[derive(Parser, Debug)]
@@ -17,6 +19,7 @@ enum Action {
 #[derive(Parser, Debug)]
 struct Get {
     /// HTTP 请求的 URL
+    #[clap(parse(try_from_str = parse_url))]
     url: String,
 }
 
@@ -27,6 +30,11 @@ struct Post {
     url: String,
     /// HTTP 请求的 body
     body: Vec<String>,
+}
+
+fn parse_url(_url: &str) -> Result<String> {
+    let url: Url = _url.parse()?;
+    Ok(url.into())
 }
 
 fn main() {

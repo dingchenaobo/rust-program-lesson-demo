@@ -7,3 +7,6 @@ edition = "2021"
 
 [dependencies]
 clap = { version = "3.1.8", features = ["derive"] } # 命令行解析
+reqwest = { version = "0.11.10", features = ["json"] } # 请求
+tokio = { version = "1.17.0", features = ["full"] } # 异步
+anyhow = "1.0.56"
